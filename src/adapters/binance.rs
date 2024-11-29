@@ -11,11 +11,9 @@ pub async fn binance_ws(symbols: Vec<String>, aggregator: Arc<DataAggregator>) {
 
             // handle_depth_order_book_event(depth_order_book, aggregator_clone);
         }
-        if let WebsocketEvent::BookTicker(book_ticker) = event {
-            println!(
-                "Level 1 Update: Symbol: {}, Best Bid: {}, Best Ask: {}",
-                book_ticker.symbol, book_ticker.best_bid, book_ticker.best_ask
-            );
+        if let WebsocketEvent::BookTicker(ref book_ticker) = event {
+            let aggregator_clone = aggregator.clone();
+            handle_book_ticker_event(book_ticker, aggregator_clone);
         }
 
         Ok(())
@@ -54,6 +52,7 @@ fn handle_book_ticker_event(book_ticker: &BookTickerEvent, aggregator: Arc<DataA
             .await;
     });
 }
+
 // fn handle_depth_order_book_event(depth: &DepthOrderBookEvent, aggregator: Arc<DataAggregator>) {
 //     let bids: Vec<(f64, f64)> = depth
 //         .bids
