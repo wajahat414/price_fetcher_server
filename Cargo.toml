@@ -9,6 +9,7 @@ homepage = "https://github.com/wajahat414/price_fetcher_server"
 documentation = "https://docs.rs/exchange-connectors"
 keywords = ["crypto", "exchange", "binance", "kucoin", "websocket"]
 categories = ["api-bindings", "network-programming"]
+readme = "README.md"
 
 [lib]
 name = "exchange_connectors"

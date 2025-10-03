@@ -1,6 +1,16 @@
 # exchange-connectors
 
+[![Crates.io](https://img.shields.io/crates/v/exchange-connectors.svg)](https://crates.io/crates/exchange-connectors)
+[![Docs.rs](https://img.shields.io/docsrs/exchange-connectors)](https://docs.rs/exchange-connectors)
+[![License: MIT/Apache-2.0](https://img.shields.io/badge/license-MIT%2FApache--2.0-blue.svg)](#license)
+
 Unified Rust connectors for top crypto exchanges (Binance, KuCoin, Kraken, MEXC) providing simple REST and WebSocket APIs with a consistent interface.
+
+## Why this library?
+
+- One small, consistent API across multiple exchanges
+- Minimal dependencies; straightforward to integrate into bots, data collectors, and services
+- Start with best-bid/ask (book ticker) and spot ticker; extend as needed
 
 ## Features
 
@@ -30,6 +40,13 @@ exchange-connectors = "0.1"
 ```
 
 MSRV: Rust 1.70+ recommended.
+
+## Support matrix
+
+- Binance: REST ticker (OK), WS bookTicker (OK)
+- KuCoin: REST ticker (OK), WS ticker (OK)
+- MEXC: REST ticker (OK), WS (Planned)
+- Kraken: REST/WS (Planned)
 
 ## Quick start
 
@@ -118,6 +135,46 @@ cargo run
 ```
 
 Or create your own binary with the code examples above.
+
+## Publishing (maintainers)
+
+This crate is intended for crates.io. To publish:
+
+1. Ensure metadata in `Cargo.toml` is correct (name, version, license, repository, readme)
+2. Login to crates.io and dry-run:
+
+```bash
+cargo login
+cargo publish --dry-run
+```
+
+3. Publish:
+
+```bash
+cargo publish
+```
+
+## Development
+
+- Build and check:
+
+```bash
+cargo build
+cargo clippy --all-targets -- -D warnings
+cargo fmt --all
+```
+
+- Run the example binary:
+
+```bash
+cargo run
+```
+
+Notes:
+
+- Public/private endpoints beyond ticker are not yet implemented (no auth flow)
+- Handle exchange rate limits yourself; this crate performs raw requests
+- Network errors and stream drops are surfaced via errors; consider reconnect/backoff in your app
 
 ## Roadmap
 
