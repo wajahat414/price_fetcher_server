@@ -1,17 +1,34 @@
 [package]
-name = "price_fetcher_server"
+name = "exchange-connectors"
 version = "0.1.0"
 edition = "2021"
+description = "Unified Rust connectors for Binance, KuCoin, Kraken, MEXC (REST + WebSocket)"
+license = "MIT OR Apache-2.0"
+repository = "https://github.com/wajahat414/price_fetcher_server"
+homepage = "https://github.com/wajahat414/price_fetcher_server"
+documentation = "https://docs.rs/exchange-connectors"
+keywords = ["crypto", "exchange", "binance", "kucoin", "websocket"]
+categories = ["api-bindings", "network-programming"]
+
+[lib]
+name = "exchange_connectors"
+path = "src/lib.rs"
+
+[[bin]]
+name = "price_fetcher_server"
+path = "src/main.rs"
 
 [dependencies]
 binance = "0.21.0"
-axum ={version= "0.6", features = ["ws"]}
+axum = { version = "0.6", features = ["ws"] }
 tokio = { version = "1", features = ["full"] }
-tokio-tungstenite = { version = "*" , features = ["tls"]}
-reqwest = {version = "0.12", features = ["json"]}
+tokio-tungstenite = { version = "*", features = ["tls"] }
+reqwest = { version = "0.12", features = ["json"] }
 futures-util = "0.3"
 futures = "0.3"
-serde = {version = "1.0", features = ["derive"]}
+serde = { version = "1.0", features = ["derive"] }
 serde_json = "1.0"
 log = "0.4"
 env_logger = "0.10"
+async-trait = "0.1"
+thiserror = "1.0"
